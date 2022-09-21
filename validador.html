@@ -1,0 +1,49 @@
+<html>
+    <head>
+
+    </head>
+    <script>
+
+    let m= "Natalia";
+    let r="Natalia.123" ;
+
+    function validador(){
+        let user=document.getElementById("user").value;
+        let paswrd= document.getElementById("pwd").value;
+
+        if (user==m&paswrd==r){
+            document.getElementById("user").style.borderColor="green";
+            document.getElementById("pwd").style.borderColor="green";
+            alert("Dades Validades");
+        }else if(user!==m&paswrd!==r){
+            document.getElementById("user").style.borderColor="red";
+            document.getElementById("pwd").style.borderColor="red";
+            alert("Cap de les dades son correctes! ");
+        }else{
+            document.getElementById("user").style.borderColor="yellow";
+            document.getElementById("pwd").style.borderColor="yellow";
+            alert("Algo no va bé, revisa que les dos dades son correctes");
+        }
+    }
+
+
+    </script>
+    <style long="css">
+        body{
+            margin:3%;
+        }
+
+    </style>
+    <body>
+        <h1 id="titulo"></h1>
+
+        <div>
+            <form accion>
+            <label for="">Validador usuari:</label>
+            <input type="text" id="user" name="user" >
+            <input type="text" id="pwd" name="pwd">
+            <button type="button" text="enviar" onclick="validador()">Enviar</button>
+            </form>
+        </div>
+    </body>
+</html>
