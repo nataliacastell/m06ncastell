@@ -11,55 +11,154 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            
+    
+    
     </head>
     <script>
 
-    let m= "Natalia";
+    let m= "nataliacastell@iesmontsia.org";
     let r="Natalia.123" ;
+    let imputCorreu;
+    let clic= 0;
+    let correu= false;
+    let exprexio;
+    let boto= true;
 
-    function validador(){
-        let user=document.getElementById("user").value;
-        let paswrd= document.getElementById("pwd").value;
 
-        if (user==m&paswrd==r){
-            document.getElementById("user").style.borderColor="green";
-            document.getElementById("pwd").style.borderColor="green";
-            alert("Dades Validades");
-        }else if(user!==m&paswrd!==r){
-            document.getElementById("user").style.borderColor="red";
-            document.getElementById("pwd").style.borderColor="red";
-            alert("Cap de les dades son correctes! ");
+    function validar_correu(){
+        imputCorreu=document.getElementById("email").value;
+        expresio=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(imputCorreu); 
+        if (expresio== true){
+            correu=true;
+            document.getElementById("email").style.borderColor="34840c";
+            
+            return correu;
+
         }else{
-            document.getElementById("user").style.borderColor="yellow";
-            document.getElementById("pwd").style.borderColor="yellow";
-            alert("Algo no va bé, revisa que les dos dades son correctes");
+            correu == false;
+            alert("Recorda que el correu ha de conteri '@' i un domini com: /.com /.es");
+            document.getElementById("email").style.borderColor="9f0303";
+            document.getElementById("email").style.backgroundColor="ffaeae";
+            return correu;
         }
     }
+
+    function validador(){
+        let paswrd= document.getElementById("pwd").value;
+       
+        if (imputCorreu==m&paswrd==r){
+            document.getElementById("email").style.borderColor="34840c";
+            document.getElementById("pwd").style.borderColor="34840c";
+            document.getElementById("email").style.backgroundColor="c7f5af";
+            document.getElementById("pwd").style.backgroundColor="c7f5af";
+            alert("Dades Validades =====> Redirigint");
+            window.location.href = "https://moodle.iesmontsia.org/";
+            }else if(imputCorreu!==m&paswrd!==r){
+                document.getElementById("email").style.borderColor="9f0303";
+                document.getElementById("pwd").style.borderColor="9f0303";
+                document.getElementById("email").style.backgroundColor="ffaeae";
+                document.getElementById("pwd").style.backgroundColor="ffaeae";
+                alert("Cap de les dades son correctes! ");
+            }else{
+                document.getElementById("email").style.borderColor="d97007";
+                document.getElementById("pwd").style.borderColor="d97007";
+                document.getElementById("email").style.backgroundColor="ffce9d";
+                document.getElementById("pwd").style.backgroundColor="ffce9d";
+                alert("Algo no va bé, revisa que les dos dades son correctes");
+            }
+    }
+    function activaboto(){
+        boto= true
+        clic= 0;
+    }
+    function retrasa5segons () {
+        setTimeout(() => {
+                validador();
+                }, 5000);
+        setTimeout(() => {
+                activaboto();
+                }, 5000);
+    }
+
+    function enviar5segons (){
+            document.getElementById("email").style.borderColor="black";
+            document.getElementById("pwd").style.borderColor="black";
+            document.getElementById("email").style.backgroundColor="white";
+            document.getElementById("pwd").style.backgroundColor="white";
+            if (boto =true& clic==0){
+                if (correu= validar_correu()==true){
+                    boto= false;
+                    retrasa5segons();
+                } clic ++;
+               
+            }else if(boto = false&&clic >= 1){
+                setTimeout(() => {
+                activaboto();
+                }, 5000);
+            }else{
+                setTimeout(() => {
+                activaboto();
+                }, 5000);
+            }
+        }
+    
+
 
 
     </script>
     <style long="css">
         body{
-            margin:3%;
+            background-color: darkcyan;
+            font-family:system-ui ;
+        }
+        .log{
+
+            min-height: 20%;
+            max-height: 20%;
+            margin: 10%;
+            background-color: azure;
+            border-radius: 3%;
+
+        }
+        .form{
+            margin: 10%;
+            margin-bottom: 40%;
+        }
+        .titulo{
+            margin: 20%;
+            font-family:system-ui ;
+            font-size: 40;
+
+        }
+
+        .loader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url('images/pageLoader.gif') 50% 50% no-repeat rgb(249,249,249);
+            opacity: .8;
         }
 
     </style>
     <body>
-        <h1 id="titulo">Validador usuari:</h1>
-
-        <div>
-            <form accion>
-            <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Usuari</label>
-            <div class="col-sm-10">
-            <input class="form-control" type="text" id="user" name="user" >
-            </div></div>
-            <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Contrasenya</label>
-            <div class="col-sm-10">
-            <input class="form-control" type="password" id="pwd" name="pwd">
-            </div></div>
-            <button type="button" text="enviar" onclick="validador()">Enviar</button>
+        <div class="log">
+            <form accion class="form">
+                <label class="titulo" id="titulo">Validador usuari:</label>
+                <div class="form-group row">
+                <label style="display: flexbox;"class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                <input style="display: flex;"class="form-control" type="email" id="email" name="email" >
+                </div></div>
+                <div class="form-group row">
+                <label style="display: flex;"class="col-sm-2 col-form-label">Contrasenya</label>
+                <div class="col-sm-10">
+                <input style="display: flex;"class="form-control" type="password" id="pwd" name="pwd">
+                </div></div>
+                <button style= "margin-bottom: 10%; "type="button" text="enviar" class="btn btn-primary" id= "submit" onclick="enviar5segons()">Enviar</button>
             </form>
         </div>
     </body>
